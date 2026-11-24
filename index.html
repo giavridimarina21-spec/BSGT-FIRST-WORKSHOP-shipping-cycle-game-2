@@ -1,0 +1,770 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Shipping Cycle Team Account</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Libre+Caslon+Text:ital@0;1&family=Special+Elite&display=swap">
+<style>
+/* Layout: a bank-statement app for one team. Balance band on top, then market, planner, reveal and statement as stacked panels. */
+:root{
+  --bg:#EEF1F5; --surface:#FFFFFF; --ink:#0B1A33; --muted:#566884; --line:#D3DBE6;
+  --gold:#9C7426; --gold-soft:#F3EAD6; --chip:#E4EAF2; --good:#1D7A4C; --bad:#B23636;
+  --hero:#0B1A33; --hero-ink:#F4F1EA; --hero-gold:#D4AF6A; --hero-muted:#9FB0C8; --hero-line:#2A4670;
+  --f-body:'DM Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --f-num:'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --f-press:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --f-print:'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  --f-type:'Special Elite', 'Courier New', Courier, monospace;
+  --paper:#F4EDDC; --paper2:#FBF8F0; --paper-ink:#1F1B14; --paper-muted:#5C5444; --paper-rule:#2B261C;
+  --tape:rgba(214,190,130,.62); --stamp-bull:#2F6B3A; --stamp-bear:#A3322A; --clip-shadow:rgba(11,26,51,.18);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#081428; --surface:#11243F; --ink:#EEF1F5; --muted:#9FB0C8; --line:#25416A;
+  --gold:#D4AF6A; --gold-soft:#2B3550; --chip:#1A3257; --good:#62C28E; --bad:#EA8080;
+  --hero:#0F2546; --hero-line:#2A4670; --paper:#E4DCC7; --paper2:#ECE6D6; --clip-shadow:rgba(0,0,0,.45); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#081428; --surface:#11243F; --ink:#EEF1F5; --muted:#9FB0C8; --line:#25416A;
+  --gold:#D4AF6A; --gold-soft:#2B3550; --chip:#1A3257; --good:#62C28E; --bad:#EA8080;
+  --hero:#0F2546; --hero-line:#2A4670; --paper:#E4DCC7; --paper2:#ECE6D6; --clip-shadow:rgba(0,0,0,.45); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:980px;margin:0 auto}
+.band{background:var(--hero);color:var(--hero-ink)}
+.band .wrap{padding-block:20px 22px;display:flex;flex-direction:column;gap:16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.eyebrow{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0}
+.band .eyebrow{color:var(--hero-gold)}
+#teamName{font:700 22px var(--f-body);color:var(--hero-ink);background:transparent;border:1px dashed var(--hero-line);border-radius:8px;padding:4px 8px;min-width:0;max-width:100%}
+.yearchip{font:500 14px var(--f-num);background:var(--hero-gold);color:#0B1A33;border-radius:999px;padding:5px 12px}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.tile{border:1px solid var(--hero-line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.tile .l{font-size:12px;color:var(--hero-muted)}
+.tile .v{font:500 clamp(18px,3vw,26px) var(--f-num);overflow-wrap:anywhere}
+.tile.nw{border-color:var(--hero-gold)} .tile.nw .v{color:var(--hero-gold)}
+@media (max-width:600px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+main .wrap{padding-block:20px 64px;display:flex;flex-direction:column;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+h2{font-size:19px;margin:0;text-wrap:balance}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)} .good{color:var(--good)} .bad{color:var(--bad)}
+.note{font-size:13px;color:var(--muted);margin:0}
+.mk{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.mk div{background:var(--bg);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.mk .l{font-size:12px;color:var(--muted)} .mk .v{font:500 17px var(--f-num)}
+.mk .s{font-size:12px;color:var(--muted)}
+.mk.brief{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.mk.brief .v{font-size:22px}
+.mk.brief .s{font-size:13px;line-height:1.4}
+.ship{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.tag{font:500 11px var(--f-num);padding:3px 7px;border-radius:5px;background:var(--chip);letter-spacing:.5px}
+.tag.eco{background:var(--gold-soft);color:var(--gold)}
+select,input[type=text],input[type=number]{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:7px 9px;min-width:0}
+.buy{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border-top:1px dashed var(--line);padding-top:12px}
+.stepper{display:flex;align-items:center;gap:6px}
+.stepper button{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:700 17px var(--f-body);cursor:pointer}
+.stepper span{min-width:22px;text-align:center}
+label.chk{display:flex;gap:8px;align-items:center}
+.res{background:var(--bg);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.line{display:flex;justify-content:space-between;gap:12px}
+.line.total{border-top:1px solid var(--line);padding-top:8px;font-weight:700}
+.warn{background:color-mix(in srgb,var(--bad) 12%,transparent);color:var(--bad);border-radius:8px;padding:10px 12px;font-weight:500}
+.ok{background:color-mix(in srgb,var(--good) 12%,transparent);color:var(--good);border-radius:8px;padding:10px 12px;font-weight:500}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:500}
+th:first-child,td:first-child{text-align:left}
+td:first-child{white-space:normal;min-width:140px}
+tr.yr td{background:var(--bg);font-weight:700}
+.btn{background:var(--ink);color:var(--bg);border:0;border-radius:8px;padding:11px 18px;font:700 14px var(--f-body);cursor:pointer}
+.btn.gold{background:var(--gold);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.gold{color:#0B1A33}}
+:root[data-theme="dark"] .btn.gold{color:#0B1A33}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+a.btn{text-decoration:none;display:inline-block}
+.results summary{cursor:pointer;list-style:none}
+.results summary::-webkit-details-marker{display:none}
+.results summary h2::after{content:" +";color:var(--gold)}
+.results[open] summary h2::after{content:" –"}
+.results > * + *{margin-top:16px}
+.hintbox{background:var(--gold-soft);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:12px 14px}
+.hintbox ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.ch3{font-size:15px;margin:0 0 6px}
+.clegend{display:flex;gap:16px;font-size:13px;color:var(--muted);margin-bottom:4px}
+.clegend span{display:flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:14px;height:3px;border-radius:2px}
+:root{--c-eco:#2a78d6;--c-old:#eb6834}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-eco:#3987e5;--c-old:#d95926}}
+:root[data-theme="dark"]{--c-eco:#3987e5;--c-old:#d95926}
+.sw.eco{background:var(--c-eco)} .sw.old{background:var(--c-old)}
+.chartwrap{position:relative}
+.chartwrap svg{width:100%;height:auto;display:block;overflow:visible}
+.cg{stroke:var(--line);stroke-width:1}
+.ct{fill:var(--muted);font:13px var(--f-num)}
+.cv{fill:var(--ink);font:500 14px var(--f-num)}
+.cl{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.cl.eco{stroke:var(--c-eco)} .cl.old{stroke:var(--c-old)}
+.cd{stroke:var(--surface);stroke-width:2}
+.cd.eco{fill:var(--c-eco)} .cd.old{fill:var(--c-old)}
+.ch{fill:transparent;cursor:crosshair}
+.cx{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+
+:root{--c-spot:#2a78d6;--c-tc:#1baf7a;--c-ffa:#6b778a;--c-fleet:#9C7426;--c-dem:#0B1A33}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--c-spot:#3987e5;--c-tc:#199e70;--c-ffa:#9FB0C8;--c-fleet:#D4AF6A;--c-dem:#EEF1F5}}
+:root[data-theme="dark"]{--c-spot:#3987e5;--c-tc:#199e70;--c-ffa:#9FB0C8;--c-fleet:#D4AF6A;--c-dem:#EEF1F5}
+.cl.spot{stroke:var(--c-spot)} .cl.tc{stroke:var(--c-tc)} .cl.ffa{stroke:var(--c-ffa)} .cl.dash{stroke-dasharray:6 5}
+.cd.spot{fill:var(--c-spot)} .cd.tc{fill:var(--c-tc)} .cd.ffa{fill:var(--c-ffa)}
+.sw.spot{background:var(--c-spot)} .sw.tc{background:var(--c-tc)} .sw.ffa{background:var(--c-ffa)} .sw.fleet{background:var(--c-fleet);height:10px;width:10px;border-radius:2px} .sw.dem{background:var(--c-dem);height:10px;width:10px;border-radius:2px}
+.sw.ecod{background:repeating-linear-gradient(90deg,var(--c-eco) 0 5px,transparent 5px 8px)} .sw.oldd{background:repeating-linear-gradient(90deg,var(--c-old) 0 5px,transparent 5px 8px)}
+.sw.dash{background:repeating-linear-gradient(90deg,var(--c-ffa) 0 5px,transparent 5px 8px)}
+.cb.fleet{fill:var(--c-fleet)} .cb.dem{fill:var(--c-dem)}
+.cv.sm{font-size:12px}
+.clegend{flex-wrap:wrap}
+tr.curr td{color:var(--muted)}
+.pill2{font:500 10px var(--f-body);letter-spacing:1px;text-transform:uppercase;background:var(--gold-soft);color:var(--gold);padding:2px 6px;border-radius:999px}
+.results td .good,.results td .bad{font-size:12px}
+
+.annot{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:18px;align-items:start}
+@media (max-width:700px){.annot{grid-template-columns:1fr}}
+.hints{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;align-self:center}
+.hints li{display:flex;flex-direction:column;gap:2px;font-size:14px;line-height:1.45;padding:8px 10px 8px 12px;border-left:5px solid var(--hc);background:color-mix(in srgb,var(--hc) 14%,transparent);border-radius:0 8px 8px 0}
+.hints .hl{font-size:12px;letter-spacing:.5px;text-transform:uppercase}
+.yband{opacity:.16}
+.cd.hollow{fill:var(--surface);stroke-width:2}
+.cd.hollow.eco{stroke:var(--c-eco)} .cd.hollow.old{stroke:var(--c-old)}
+.bdgi{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--bg);font:700 12px var(--f-body)}
+.bdg{fill:var(--ink)} .bdgt{fill:var(--bg);font:700 12px var(--f-body)}
+.arrow{stroke:var(--ink);stroke-width:1.5} .arrowhead{fill:var(--ink)}
+
+
+.introwrap{padding-top:20px !important;padding-bottom:0 !important}
+.introbtn{display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;background:var(--gold);color:#fff;text-decoration:none;
+  font:700 15px var(--f-body);letter-spacing:1.5px;padding:16px 18px;border-radius:12px;box-shadow:0 6px 18px rgba(11,26,51,.18)}
+.introbtn::after{content:"↗";font-size:18px}
+.introbtn:hover{filter:brightness(1.08)}
+.introbtn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+:root[data-theme="dark"] .introbtn{color:#0B1A33}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .introbtn{color:#0B1A33}}
+@media (prefers-reduced-motion:no-preference){
+  .introbtn.shake{animation:introshake .9s ease-in-out .4s 6}
+  @keyframes introshake{0%,45%,100%{transform:none}8%{transform:translateX(-7px) rotate(-1deg)}16%{transform:translateX(6px) rotate(1deg)}24%{transform:translateX(-5px)}32%{transform:translateX(3px)}40%{transform:translateX(-1px)}}
+}
+.ctip{position:absolute;top:0;pointer-events:none;background:var(--ink);color:var(--bg);font:12px var(--f-num);padding:6px 8px;border-radius:6px;white-space:nowrap;opacity:0;transform:translateX(-50%);transition:opacity .1s}
+
+.guide summary{cursor:pointer;list-style:none}
+.guide summary::-webkit-details-marker{display:none}
+.guide summary h2::after{content:" +";color:var(--gold)}
+.guide[open] summary h2::after{content:" –"}
+.guide .steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px}
+.guide .steps ul{margin:6px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.guide > * + *{margin-top:12px}
+.rule-quote{margin:10px 0 0;border-left:4px solid var(--gold);background:var(--gold-soft);border-radius:0 8px 8px 0;padding:12px 14px;font-weight:700}
+.btn.danger{background:var(--bad);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.scen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.scen div{background:var(--bg);border-radius:8px;padding:10px;text-align:center;display:flex;flex-direction:column;gap:2px}
+.scen .l{font-size:12px;color:var(--muted)}
+/* news clippings */
+.clips{display:grid;grid-template-columns:1fr 1fr;gap:22px 18px;padding:6px 4px 10px}
+.clip{background:var(--paper);color:var(--paper-ink);position:relative;box-shadow:0 6px 16px var(--clip-shadow);min-width:0}
+.paper{grid-column:1/-1;padding:22px 22px 26px;transform:rotate(-.6deg)}
+.mast{display:flex;flex-direction:column;align-items:center;gap:4px;border-bottom:3px double var(--paper-rule);padding-bottom:8px}
+.mast b{font:900 clamp(18px,4vw,28px) var(--f-press);letter-spacing:1px;text-transform:uppercase}
+.mast span{font:italic 12px var(--f-print);color:var(--paper-muted);display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.paper h3{font:900 clamp(26px,5.6vw,42px)/1.05 var(--f-press);margin:14px 0 10px;text-wrap:balance}
+.paper .kick{font:italic 15px var(--f-press);color:var(--paper-muted);margin:0 0 10px;border-bottom:1px solid var(--paper-rule);padding-bottom:8px}
+.paper p.body{font:15px/1.6 var(--f-print);margin:0;text-align:justify;hyphens:auto}
+.paper p.body::first-letter{font:900 3.1em/0.8 var(--f-press);float:left;padding:4px 6px 0 0}
+.paper p.body{max-width:68ch}
+.note2{background:var(--paper2);padding:38px 18px 18px;display:flex;flex-direction:column;gap:12px}
+.note2.bull{transform:rotate(1.1deg)} .note2.bear{transform:rotate(-1.3deg)}
+.note2 .hd{font:12px var(--f-type);letter-spacing:2px;text-transform:uppercase;color:var(--paper-muted);border-bottom:1px dashed var(--paper-muted);padding-bottom:6px}
+.note2 q{font:17px/1.45 var(--f-type);quotes:none}
+.note2 .who{font:italic 14px var(--f-print);color:var(--paper-muted)}
+.tape{position:absolute;top:2px;left:50%;width:88px;height:24px;background:var(--tape);transform:translateX(-50%) rotate(-3deg)}
+.stamp{position:absolute;right:12px;bottom:12px;font:900 15px var(--f-press);letter-spacing:3px;border:3px solid currentColor;border-radius:4px;padding:2px 8px;transform:rotate(-12deg);opacity:.75}
+.bull .stamp{color:var(--stamp-bull)} .bear .stamp{color:var(--stamp-bear)}
+@media (max-width:560px){.clips{grid-template-columns:1fr}}
+#code{font:500 20px var(--f-num);letter-spacing:4px;width:130px;text-align:center}
+</style>
+
+<div class="band"><div class="wrap">
+  <div class="top">
+    <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
+      <p class="eyebrow">BSGT · Shipping Cycle Game · Team account</p>
+      <input type="text" id="teamName" aria-label="Team name" maxlength="24">
+    </div>
+    <span class="yearchip" id="yearchip">2027</span>
+  </div>
+  <div class="tiles" id="tiles"></div>
+</div></div>
+<main><div class="wrap introwrap"><a id="introBtn" class="introbtn" href="#" target="_blank" rel="noopener">INTRODUCTION OF THE ROUND – READ BEFORE YOU START</a></div><div class="wrap" id="app"></div></main>
+
+<script>
+(function(){
+const M=1e6;
+const R={startCash:20*M, ltv:.5, amort:.1, rate:.07, layup:.3, scrap:6*M,
+  ship:{old:{label:'Old (2011)',days:335,opex:7800,spotGap:4000,tcGap:3000},eco:{label:'Eco (2021)',days:355,opex:6800,spotGap:0,tcGap:0}}};
+const FIRST={year:2027,tc:17000,prevSpot:16000,ffa:16500,ffaNext:13000,fleet:'+2.5%',fleetNext:'+4.5%',demand:'+3%',prices:{old:18*M,eco:36*M},headline:"Long routes keep ships busy",story:"Hormuz is still restricted and Red Sea traffic is low. Grain and bauxite travel further, so more ships are tied up. Charterers are nervous and offer one-year deals.",bull:"“Buy now. Long routes will last for years, and rates stay above $20,000 into 2028.” · Broker A",bear:"“Don’t buy at these prices. The ships ordered in 2025 arrive next year, and rates will fall.” · Bank research"};
+const LOCK={"2027": {"c": "NDcyMQ==", "d": "eyJzcG90IjogMjEwMDAsICJlbmRPbGQiOiAyMTAwMDAwMC4wLCAiZW5kRWNvIjogNDAwMDAwMDAuMCwgIm5leHQiOiB7InllYXIiOiAyMDI4LCAidGMiOiAxMjAwMCwgInByZXZTcG90IjogMjEwMDAsICJmZmEiOiAxMTUwMCwgImZmYU5leHQiOiAxMzUwMCwgImZsZWV0IjogIis0LjUlIiwgImZsZWV0TmV4dCI6ICIrMSUiLCAiZGVtYW5kIjogIisxJSIsICJoZWFkbGluZSI6ICJUaGUgb3JkZXIgYm9vayBhcnJpdmVzIiwgInN0b3J5IjogIlNoaXBzIG9yZGVyZWQgaW4gMjAyNeKAkzI2IGFyZSBkZWxpdmVyZWQgYW5kIHRoZSBmbGVldCBncm93cyBmYXN0LiBDaGluYSBzaWduYWxzIGxvd2VyIHN0ZWVsIG91dHB1dC4gQnJva2VycyBkaXNhZ3JlZSBvbiB3aGF0IGNvbWVzIG5leHQuIiwgImJ1bGwiOiAi4oCcTm9ib2R5IGlzIG9yZGVyaW5nIGFuZCBvbGQgc2hpcHMgZ28gdG8gc2NyYXAuIDIwMjkgd2lsbCByZWNvdmVyLuKAnSDCtyBCcm9rZXIgQiIsICJiZWFyIjogIuKAnENoaW5hIGlzIGN1dHRpbmcgc3RlZWwuIFRoaXMgY291bGQgbGFzdCB0d28geWVhcnMu4oCdIMK3IEFuYWx5c3QgQyJ9fQ=="}, "2028": {"c": "ODM1MA==", "d": "eyJzcG90IjogOTAwMCwgImVuZE9sZCI6IDEyMDAwMDAwLjAsICJlbmRFY28iOiAyNzAwMDAwMC4wLCAibmV4dCI6IHsieWVhciI6IDIwMjksICJ0YyI6IDE1MDAwLCAicHJldlNwb3QiOiA5MDAwLCAiZmZhIjogMTQwMDAsICJmZmFOZXh0IjogMTU1MDAsICJmbGVldCI6ICIrMSUiLCAiZmxlZXROZXh0IjogIisxLjUlIiwgImRlbWFuZCI6ICIrMi41JSIsICJoZWFkbGluZSI6ICJPbGQgc2hpcHMgbGVhdmUgdGhlIGZsZWV0IiwgInN0b3J5IjogIkxvdyByYXRlcyBwdXNoIGNvbXBhbmllcyB0byBzY3JhcCBvbGQgdG9ubmFnZS4gT3JkZXJzIGhhdmUgZHJpZWQgdXAuIERlbWFuZCBpcyBzdGVhZHkuIiwgImJ1bGwiOiAi4oCcRmxlZXQgZ3Jvd3RoIGlzIHRoZSBsb3dlc3QgaW4gYSBkZWNhZGUuIFZhbHVlcyBoYXZlIHRvIHJpc2Uu4oCdIMK3IEJyb2tlciBBIiwgImJlYXIiOiAi4oCcVGhlIHJlY292ZXJ5IGlzIGZyYWdpbGUuIE9uZSB3ZWFrIHF1YXJ0ZXIgaW4gQ2hpbmEgZW5kcyBpdC7igJ0gwrcgQmFuayByZXNlYXJjaCJ9fQ=="}, "2029": {"c": "MTk2Ng==", "d": "eyJzcG90IjogMTgwMDAsICJlbmRPbGQiOiAxNzAwMDAwMC4wLCAiZW5kRWNvIjogMzQwMDAwMDAuMH0="}};
+const KEY='bsgt-cycle-team-v1';
+let S, ui={confirm:null, codeMsg:'', copied:''};
+
+function fresh(){ return {name:'My shipping company', cash:R.startCash, ships:[], loanTotal:0, ledger:[{year:'Start',text:'Opening capital',amt:R.startCash}],
+  brief:JSON.parse(JSON.stringify(FIRST)), done:false, nextId:1, values:null, plan:null, history:[], prev:null}; }
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} }
+function load(){ try{const r=localStorage.getItem(KEY); if(r) return JSON.parse(r);}catch(e){} return null; }
+const fm=v=>(v<0?'−':'')+'$'+(Math.abs(v)/M).toFixed(2)+'m';
+const fk=v=>'$'+Math.round(v).toLocaleString('en-US');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const loanBal=()=>S.ships.reduce((a,s)=>a+(s.loan?s.loan.bal:0),0);
+
+function plan(){
+  if(!S.plan) S.plan={ships:{},buyOld:0,buyEco:0,loan:true,newEmp:'tc',guess:S.brief.ffa};
+  S.ships.forEach(s=>{ if(!S.plan.ships[s.id]) S.plan.ships[s.id]='spot'; });
+  return S.plan;
+}
+function rate(type,act,spot,tc){ const d=R.ship[type]; return act==='tc'? tc-d.tcGap : spot-d.spotGap; }
+
+// simulate the year with a given spot rate; returns lines and end cash (before any forced sale)
+function simulate(spot, opts={}){
+  const b=S.brief, p=plan(), px=b.prices, L=[]; let cash=S.cash;
+  let ships=S.ships.map(s=>({...s, loan:s.loan?{...s.loan}:null}));
+  ships=ships.filter(s=>{ const a=p.ships[s.id];
+    if(a==='sell'||a==='scrap'){ const price=a==='sell'?px[s.type]:R.scrap, bal=s.loan?s.loan.bal:0;
+      L.push([(a==='sell'?'Sale of ':'Scrap of ')+s.type+' ship',price]); if(bal) L.push(['Loan paid off from the sale',-bal]);
+      cash+=price-bal; return false; }
+    s.act=a; return true; });
+  const afterSales=cash;
+  [['old',p.buyOld],['eco',p.buyEco]].forEach(([t,n])=>{ for(let k=0;k<n;k++){
+    const loan=p.loan?px[t]*R.ltv:0; L.push(['Purchase of '+t+' ship',-px[t]]); if(loan) L.push(['Bank loan (50%)',loan]);
+    cash-=px[t]-loan; ships.push({id:'n'+t+k,type:t,act:p.newEmp,loan:loan?{orig:loan,bal:loan}:null}); }});
+  const afterTrades=cash;
+  let rev=0,opex=0,rep=0,int=0;
+  ships.forEach(s=>{ const d=R.ship[s.type], oy=d.opex*365;
+    if(s.act==='layup') opex+=R.layup*oy; else { rev+=rate(s.type,s.act,spot,b.tc)*d.days; opex+=oy; }
+    if(s.loan&&s.loan.bal>0){ const i=s.loan.bal*R.rate, r=Math.min(s.loan.orig*R.amort,s.loan.bal); int+=i; rep+=r; s.loan.bal-=r; }
+  });
+  const tcShips=ships.filter(s=>s.act==='tc'), spotShips=ships.filter(s=>s.act==='spot');
+  if(spotShips.length) L.push(['Spot revenue ('+spotShips.length+' ship'+(spotShips.length>1?'s':'')+')', spotShips.reduce((a,s)=>a+rate(s.type,'spot',spot,b.tc)*R.ship[s.type].days,0)]);
+  if(tcShips.length) L.push(['Charter revenue ('+tcShips.length+' ship'+(tcShips.length>1?'s':'')+')', tcShips.reduce((a,s)=>a+rate(s.type,'tc',spot,b.tc)*R.ship[s.type].days,0)]);
+  if(opex) L.push([ships.some(s=>s.act==='layup')?'Running costs (incl. lay-up)':'Running costs',-opex]);
+  if(rep) L.push(['Loan repayment (10%)',-rep]);
+  if(int) L.push(['Loan interest (7%)',-int]);
+  cash+=rev-opex-rep-int;
+  return {L,cash,afterTrades,afterSales,ships,rev,opex,rep,int};
+}
+
+function applyYear(rv){
+  S.lastWhy=(S.plan&&S.plan.why)||''; ui.hint=false;
+  S.prev=JSON.stringify({...S,prev:null});
+  const b=S.brief, sim=simulate(rv.spot), ev={old:rv.endOld,eco:rv.endEco};
+  sim.L.forEach(([t,a])=>S.ledger.push({year:b.year,text:t,amt:a}));
+  let cash=sim.cash; let ships=sim.ships.map(s=>({id:typeof s.id==='number'?s.id:S.nextId++,type:s.type,loan:s.loan,last:s.act}));
+  const forced=[];
+  while(cash<0 && ships.length){
+    ships.sort((a,c)=>(ev[c.type]-(c.loan?c.loan.bal:0))-(ev[a.type]-(a.loan?a.loan.bal:0)));
+    const s=ships.shift(), bal=s.loan?s.loan.bal:0;
+    S.ledger.push({year:b.year,text:'Forced sale by the bank: '+s.type+' ship',amt:ev[s.type]});
+    if(bal) S.ledger.push({year:b.year,text:'Loan paid off from the forced sale',amt:-bal});
+    cash+=ev[s.type]-bal; forced.push(s.type);
+  }
+  S.cash=cash; S.ships=ships; S.values=ev;
+  const nw=cash+ships.reduce((a,s)=>a+ev[s.type],0)-ships.reduce((a,s)=>a+(s.loan?s.loan.bal:0),0);
+  S.history.push({year:b.year,spot:rv.spot,nw,forced,cash,tc:b.tc,ffa:b.ffa,prevSpot:b.prevSpot,pStart:{...b.prices},pEnd:{old:rv.endOld,eco:rv.endEco}});
+  if(rv.next){ S.brief={...rv.next,prices:{old:rv.endOld,eco:rv.endEco}}; S.plan=null; }
+  else { S.done=true; S.plan=null; }
+  save();
+}
+
+function netWorth(){
+  const v=S.values||S.brief.prices;
+  return S.cash+S.ships.reduce((a,s)=>a+v[s.type],0)-loanBal();
+}
+
+// ---------- render
+function tiles(){
+  const nOld=S.ships.filter(s=>s.type==='old').length, nEco=S.ships.length-nOld;
+  document.getElementById('tiles').innerHTML=`
+   <div class="tile"><span class="l">Cash in the bank</span><span class="v num ${S.cash<0?'bad':''}">${fm(S.cash)}</span></div>
+   <div class="tile"><span class="l">Fleet</span><span class="v num">${S.ships.length?[nOld?nOld+' old':'',nEco?nEco+' eco':''].filter(Boolean).join(' · '):'No ships'}</span></div>
+   <div class="tile"><span class="l">Loans</span><span class="v num">${fm(loanBal())}</span></div>
+   <div class="tile nw"><span class="l">Net worth</span><span class="v num">${fm(netWorth())}</span></div>`;
+  document.getElementById('yearchip').textContent=S.done?'Game over':S.brief.year;
+  const tn=document.getElementById('teamName'); if(document.activeElement!==tn) tn.value=S.name;
+}
+function torn(seed,top,bottom){
+  let s=seed; const rnd=()=>{ s=(s*9301+49297)%233280; return s/233280; };
+  const pts=[]; const n=26;
+  for(let i=0;i<=n;i++){ const x=(i/n*100).toFixed(1); pts.push(x+'% '+(top?(rnd()*1.6).toFixed(2):'0')+'%'); }
+  for(let i=n;i>=0;i--){ const x=(i/n*100).toFixed(1); pts.push(x+'% '+(bottom?(100-rnd()*1.8).toFixed(2):'100')+'%'); }
+  return 'clip-path:polygon('+pts.join(',')+')';
+}
+function news(){
+  const b=S.brief; if(!b.headline) return '';
+  const split=q=>{ const i=q.lastIndexOf(' · '); return i>0?[q.slice(0,i),q.slice(i+3)]:[q,'']; };
+  const [bq,bw]=split(b.bull), [eq,ew]=split(b.bear);
+  const strip=s=>s.replace(/^[“"]|[”"]$/g,'');
+  return `<section class="card"><p class="eyebrow">${b.year} · The news this morning</p><h2>What the papers and the analysts are saying</h2>
+  <div class="clips">
+    <article class="clip paper" style="${torn(b.year,true,true)}">
+      <div class="mast"><b>The Maritime Gazette</b><span><span>Shipping &amp; Commodities</span><span>·</span><span>${new Date(Date.UTC(b.year,0,4)).toLocaleDateString('en-GB',{weekday:'long',timeZone:'UTC'})}, 4 January ${b.year}</span></span></div>
+      <h3>${esc(b.headline)}</h3>
+      <p class="kick">Dry bulk companies face a ${b.year} of hard choices</p>
+      <p class="body">${esc(b.story)}</p>
+    </article>
+    <aside class="clip note2 bull" style="${torn(b.year+7,false,true)}"><span class="tape"></span>
+      <span class="hd">Broker’s note · The optimist</span><q>${esc(strip(bq))}</q><span class="who">— ${esc(bw)}</span><span class="stamp">BULL</span></aside>
+    <aside class="clip note2 bear" style="${torn(b.year+13,false,true)}"><span class="tape"></span>
+      <span class="hd">Research desk · The pessimist</span><q>${esc(strip(eq))}</q><span class="who">— ${esc(ew)}</span><span class="stamp">BEAR</span></aside>
+  </div></section>`;
+}
+function guide(){
+  const b=S.brief, y=b.year, gap=R.ship.old.spotGap, tg=R.ship.old.tcGap;
+  if(!ui.guideOpen) ui.guideOpen={};
+  const open = ui.guideOpen[y]===undefined ? true : ui.guideOpen[y];
+  const n=S.ships.length, nOld=S.ships.filter(s=>s.type==='old').length, nEco=n-nOld;
+  const fleetTxt=n?[nOld?nOld+' old':'',nEco?nEco+' eco':''].filter(Boolean).join(' and ')+' ship'+(n>1?'s':''):'no ships';
+  const lastWhy=(S.lastWhy||'').trim();
+  const G={
+   2027:{title:'Round 1 · Your first purchase',
+    intro:`You have ${fm(S.cash)} in cash and no ships. Before you buy, read the market for this year <i>and</i> next year.`,
+    steps:[
+     `<b>Supply vs demand this year.</b> The fleet grows ${esc(b.fleet)} and cargo demand ${esc(b.demand)}. Which grows faster? What does that mean for rates in ${y}?`,
+     `<b>And next year?</b> The order book says the fleet grows ${esc(b.fleetNext)} in ${y+1}. Is that more or less than demand usually grows?`,
+     `<b>What does the market expect?</b> The FFA is ${fk(b.ffa)} for ${y} and ${fk(b.ffaNext)} for ${y+1}. Is the market expecting rates to rise or fall?`,
+     `<b>Charter or spot?</b> The charter offer is ${fk(b.tc)} (old ship ${fk(b.tc-tg)}). That is ${b.tc>=b.ffa?'above':'below'} the FFA of ${fk(b.ffa)}. A charter locks in the rate; spot is a bet on the market.`,
+     `<b>Which ship, and how many?</b> Old: ${fm(b.prices.old)}, smaller loan payment, ${fm(R.scrap)} scrap value, earns $4,000 a day less than eco on spot (a fixed simplifying assumption). Eco: ${fm(b.prices.eco)}, earns more per day. With the 50% loan, the same cash buys twice the ships, and twice the risk.`,
+     `<b>Survive being wrong.</b> Look at the left box under “What if…?” (spot ${fk(4000)} below your guess). Is your cash still positive?`,
+     `<b>Decide your exit now.</b> Write in the “Why” line what would make you sell next year.`]},
+   2028:{title:'Round 2 · Check your exit rule',
+    intro:`You manage ${fleetTxt} and have ${fm(S.cash)} in cash. Last year is over. The question now is what to keep.`,
+    steps:[
+     lastWhy?`<b>Your rule from last year:</b> “${esc(lastWhy)}”. Does this brief trigger it?`:`<b>Look back.</b> What did you plan to do this year when you bought? Does this brief match that plan?`,
+     `<b>Supply vs demand this year.</b> The fleet grows ${esc(b.fleet)} and cargo demand ${esc(b.demand)}. Which grows faster now? Compare with last year.`,
+     `<b>What are charterers telling you?</b> Last year spot averaged ${fk(b.prevSpot)}. Today’s charter offer is ${fk(b.tc)} (old ship ${fk(b.tc-tg)}). Why would they offer so much less?`,
+     `<b>What does the market expect?</b> The FFA is ${fk(b.ffa)} for ${y} and ${fk(b.ffaNext)} for ${y+1}. Down, then what?`,
+     `<b>For each ship: sell now or keep?</b> Today you can sell at ${fm(b.prices.old)} (old) or ${fm(b.prices.eco)} (eco). If you keep it, can you pay its running costs and loan this year? Check the left box under “What if…?”. If cash goes negative, the bank sells at the <i>year-end</i> price, not today’s.`,
+     `<b>Cash is also a choice.</b> If prices fall this year, who will be able to buy cheap at the start of ${y+1}?`,
+     `<b>Watch out:</b> “it went up, so keep it” is not a reason. Decide from this brief, not from last year.`]},
+   2029:{title:'Round 3 · The last year',
+    intro:`You manage ${fleetTxt} and have ${fm(S.cash)} in cash. This is the final round: only your net worth at the end of ${y} counts (cash + ship values − loans).`,
+    steps:[
+     `<b>Supply vs demand this year.</b> The fleet grows ${esc(b.fleet)} and cargo demand ${esc(b.demand)}. Has the balance changed since last year?`,
+     `<b>What does the market expect?</b> The FFA is ${fk(b.ffa)} for ${y} and ${fk(b.ffaNext)} for ${y+1}. Compare with last year’s spot of ${fk(b.prevSpot)}.`,
+     `<b>Are ships cheap or expensive?</b> Old ${fm(b.prices.old)}, eco ${fm(b.prices.eco)}. Compare with ${fm(18e6)} and ${fm(36e6)} two years ago. Your net worth counts ship values at year end, so the price you buy at matters.`,
+     `<b>Charter or spot?</b> The charter offer is ${fk(b.tc)} (old ship ${fk(b.tc-tg)}), against an FFA of ${fk(b.ffa)}.`,
+     `<b>How much can you afford?</b> With the 50% loan, a ship costs you half in cash. More ships = more upside, but the loan payments still come this year.`,
+     `<b>Survive being wrong, one last time.</b> A forced sale at year end hurts your final score. Check the left box under “What if…?”.`,
+     `<b>No exit needed.</b> The game ends after ${y}. What matters is the value of what you hold on the last day.`]}
+  }[y];
+  if(!G||y!==2027) return '';
+  return `<details class="card guide" data-year="${y}" ${open?'open':''}>
+  <summary><span class="eyebrow">Player guide · ${y}</span><h2 style="margin-top:4px">${G.title}</h2></summary>
+  <p style="margin:0">${G.intro}</p>
+  <ol class="steps">${G.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+  <p class="note">Every year an optimist and a pessimist disagree. Don’t pick one. Split their quotes into claims and check each against the numbers above: a quote can be right about this year and wrong about next.</p>
+  ${y<2029?'<blockquote class="rule-quote">Decide your exit before you enter.</blockquote>':''}
+  <blockquote class="rule-quote">Good managers don’t need to guess right. They need to survive being wrong.</blockquote>
+  <blockquote class="rule-quote">Don’t pick a forecaster. Check their claims against supply, demand and the FFA, size your bet so you survive if you’re wrong, and decide your exit in advance.</blockquote>
+  </details>`;
+}
+function marketBrief(){
+  const b=S.brief, y=b.year, g=R.ship.old.spotGap, tg=R.ship.old.tcGap, px=b.prices;
+  const box=(l,v,sub)=>`<div><span class="l">${l}</span><span class="v num">${v}</span><span class="s">${sub}</span></div>`;
+  return `<section class="card"><h2>${y} market brief: ${esc(b.headline||'')}</h2>
+  <div class="mk brief">
+    ${box('One-year charter offer',fk(b.tc),`per day, eco · old ship ${fk(b.tc-tg)}`)}
+    ${box('Average spot last year',fk(b.prevSpot),`per day, eco · old ship ${fk(b.prevSpot-g)} (eco − $4,000, fixed assumption). This year’s spot is revealed after you decide.`)}
+    ${box('Old ship price',fm(px.old),`built 2011 · scrap ${fm(R.scrap)}`)}
+    ${box('Eco ship price',fm(px.eco),'built 2021 · scrap not allowed')}
+  </div>
+  <p class="eyebrow">What the market expects</p>
+  <div class="mk brief">
+    ${box('FFA price for '+y,fk(b.ffa),`eco · ${fk(b.ffa-g)} old ${y} · what traders pay today to lock in ${y} spot`)}
+    ${box('FFA price for '+(y+1),fk(b.ffaNext),`next year ${fk(b.ffaNext)} eco / ${fk(b.ffaNext-g)} old · old = eco − $4,000 (fixed assumption)`)}
+    ${box('Fleet growth',esc(b.fleet),`${y} · next year ${esc(b.fleetNext)} (order book)`)}
+    ${box('Cargo demand',esc(b.demand),`tonne-miles, ${y} forecast`)}
+  </div>
+  <p class="note">Forecasts are often wrong. Fleet growth above demand growth usually means falling rates.</p></section>`;
+}
+function market(){
+  const b=S.brief, o=R.ship.old;
+  return `<section class="card"><p class="eyebrow">${b.year} · Market</p><h2>What you know before you decide</h2>
+  <div class="mk">
+    <div><span class="l">1-year charter offer</span><span class="v num">${fk(b.tc)} eco</span><span class="s num">${fk(b.tc-o.tcGap)} old</span></div>
+    <div><span class="l">Average spot last year</span><span class="v num">${fk(b.prevSpot)} eco</span><span class="s num">${fk(b.prevSpot-o.spotGap)} old (eco − $4,000, fixed assumption)</span></div>
+    <div><span class="l">Ship prices now</span><span class="v num">${fm(b.prices.eco)} eco</span><span class="s num">${fm(b.prices.old)} old · scrap ${fm(R.scrap)}</span></div>
+    <div><span class="l">FFA (market forecast for spot)</span><span class="v num">${fk(b.ffa)} eco ${b.year}</span><span class="s num">${fk(b.ffa-o.spotGap)} old ${b.year} · next year ${fk(b.ffaNext)} eco / ${fk(b.ffaNext-o.spotGap)} old · old = eco − $4,000 (fixed assumption)</span></div>
+    <div><span class="l">Fleet growth</span><span class="v num">${esc(b.fleet)}</span><span class="s">next year ${esc(b.fleetNext)}</span></div>
+    <div><span class="l">Cargo demand</span><span class="v num">${esc(b.demand)}</span><span class="s">this year</span></div>
+  </div>
+  <p class="note">Spot changes every day; these are yearly averages. This year’s average spot is revealed by the game master after you decide. FFA = the price at which traders buy and sell future freight rates today. All rates per day. On spot, old ships always earn $4,000 a day less than eco: this is a fixed simplifying assumption of the game. In reality the gap moves with fuel prices and the market.</p></section>`;
+}
+function planner(){
+  const b=S.brief, p=plan(), px=b.prices;
+  const opts=(t,v)=>[['spot','Spot'],['tc','1-year charter'],['layup','Lay-up'],['sell','Sell at '+fm(px[t])],...(t==='old'?[['scrap','Scrap for '+fm(R.scrap)]]:[])]
+     .map(([k,l])=>`<option value="${k}" ${v===k?'selected':''}>${l}</option>`).join('');
+  const sim=simulate(+p.guess||0);
+  const tooMuch=sim.afterTrades< -1;
+  const sc=[p.guess-4000,+p.guess,+p.guess+4000].map(g=>({g,c:simulate(g).cash}));
+  // which ship types will the team manage this year? the guess is shown in the matching ship's terms
+  const kept=S.ships.filter(s=>!['sell','scrap'].includes(p.ships[s.id])).map(s=>s.type);
+  if(p.buyOld) kept.push('old'); if(p.buyEco) kept.push('eco');
+  const hasOld=kept.includes('old'), hasEco=kept.includes('eco');
+  const gType=hasOld&&!hasEco?'old':'eco', gap=R.ship.old.spotGap, shown=g=>gType==='old'?g-gap:g;
+  return `<section class="card"><p class="eyebrow">${b.year} · Plan</p><h2>What if…? Try options and watch your year-end cash</h2>
+  ${S.ships.length?S.ships.map(s=>`<div class="ship"><span class="tag ${s.type}">${s.type.toUpperCase()}</span>
+     <span class="muted num" style="font-size:13px">loan ${fm(s.loan?s.loan.bal:0)}</span>
+     <select data-ship="${s.id}" aria-label="Plan for ${s.type} ship">${opts(s.type,p.ships[s.id])}</select></div>`).join(''):'<p class="note">You manage no ships yet.</p>'}
+  <div class="buy">
+    <span>Buy old <span class="muted num">${fm(px.old)}</span></span>
+    <span class="stepper"><button data-buy="buyOld.-1" aria-label="One fewer old ship">−</button><span class="num">${p.buyOld}</span><button data-buy="buyOld.1" aria-label="One more old ship">+</button></span>
+    <span>Buy eco <span class="muted num">${fm(px.eco)}</span></span>
+    <span class="stepper"><button data-buy="buyEco.-1" aria-label="One fewer eco ship">−</button><span class="num">${p.buyEco}</span><button data-buy="buyEco.1" aria-label="One more eco ship">+</button></span>
+    ${(p.buyOld||p.buyEco)?`<label class="chk"><input type="checkbox" id="loan" ${p.loan?'checked':''}> Pay with a 50% bank loan</label><span></span>
+    <span>New ships go on</span><select id="newEmp" aria-label="Employment for new ships">${[['spot','Spot'],['tc','1-year charter'],['layup','Lay-up']].map(([k,l])=>`<option value="${k}" ${p.newEmp===k?'selected':''}>${l}</option>`).join('')}</select>`:''}
+  </div>
+  <div class="buy"><label for="guess">Your guess for this year’s average ${gType} spot rate ($/day)${hasOld&&hasEco?`<span class="note" style="display:block">Your old ships earn $4,000 less (fixed simplifying assumption): <b class="num">${fk(Math.max(0,(+p.guess||0)-gap))}</b>/day.</span>`:''}</label>
+    <input type="number" id="guess" data-type="${gType}" step="500" value="${Math.max(0,shown(+p.guess||0))}" style="width:120px"></div>
+  <div class="res">
+    <div class="line"><span>Cash now</span><span class="num">${fm(S.cash)}</span></div>
+    ${sim.L.map(([t,a])=>`<div class="line"><span class="muted">${esc(t)}</span><span class="num ${a<0?'bad':''}">${a>=0?'+':''}${fm(a)}</span></div>`).join('')}
+    <div class="line total"><span>Cash at year end, at your guess</span><span class="num ${sim.cash<0?'bad':''}">${fm(sim.cash)}</span></div>
+  </div>
+  ${tooMuch?`<p class="warn" role="alert">You can’t afford this. After buying you would have ${fm(sim.afterTrades)}. Buy less, sell something, or use the loan.</p>`
+    : sim.cash<0?`<p class="warn" role="alert">At your guess you run out of cash, and the bank will sell a ship at the year-end price.</p>`
+    :`<p class="ok">At your guess you end the year with cash in the bank.</p>`}
+  <div><p class="note" style="margin-bottom:6px">Year-end cash if ${gType} spot turns out to be…</p>
+  <div class="scen">${sc.map(x=>`<div><span class="l num">${fk(Math.max(0,shown(x.g)))}</span><span class="num ${x.c<0?'bad':''}">${fm(x.c)}</span></div>`).join('')}</div></div>
+  </section>`;
+}
+const GM_EMAIL='as.bsgt@unibocconi.it';
+const DEFAULT_NAME='My shipping company';
+function decisionText(){
+  const p=plan(), y=S.brief.year, L={spot:'Spot',tc:'1-year charter',layup:'Lay-up',sell:'Sell',scrap:'Scrap'};
+  const lines=['Team: '+S.name,'Round: '+y,''];
+  if(S.ships.length) S.ships.forEach((s,i)=>lines.push('Ship '+(i+1)+' ('+s.type+'): '+L[p.ships[s.id]]));
+  else lines.push('Ships we manage: none');
+  lines.push('Buy: old '+p.buyOld+', eco '+p.buyEco);
+  if(p.buyOld||p.buyEco){ lines.push('Pay with: '+(p.loan?'50% bank loan':'cash')); lines.push('New ships go on: '+L[p.newEmp]); }
+  lines.push('','Why: '+((p.why||'').trim()||'-'));
+  return lines.join('\n');
+}
+function mailLinks(){
+  const subject=S.name+' – '+S.brief.year, body=decisionText(), e=encodeURIComponent;
+  return {
+    outlook:'https://outlook.office.com/mail/deeplink/compose?to='+e(GM_EMAIL)+'&subject='+e(subject)+'&body='+e(body),
+    mailto:'mailto:'+GM_EMAIL+'?subject='+e(subject)+'&body='+e(body)
+  };
+}
+function submit(){
+  const p=plan(), sim=simulate(+p.guess||0), tooMuch=sim.afterTrades<-1, noName=!S.name||S.name===DEFAULT_NAME;
+  const blocked=tooMuch||noName;
+  return `<section class="card" style="border-color:var(--gold)"><p class="eyebrow">${S.brief.year} · Send your decision</p>
+  <h2>Email your decision to the game master before the timer ends</h2>
+  <div class="buy" style="grid-template-columns:1fr"><label for="why">Why (one line)</label>
+    <input type="text" id="why" maxlength="140" value="${esc(p.why||'')}" placeholder="e.g. Buy cheap now, sell before the order book arrives"></div>
+  ${noName?`<p class="warn" role="alert">First type your team name at the top of the page. It goes in the email subject.</p>`:''}
+  ${tooMuch?`<p class="warn" role="alert">You can’t afford this plan. Fix it above before you send.</p>`:''}
+  <pre id="mailPreview" class="res num" style="margin:0;white-space:pre-wrap;font-size:13px">${esc(decisionText())}</pre>
+  <p class="note">Subject: <b id="mailSubject">${esc(S.name)} – ${S.brief.year}</b> · To: ${GM_EMAIL}</p>
+  <div class="row">
+    <a class="btn gold mail" data-kind="outlook" target="_blank" rel="noopener" href="#" ${blocked?'aria-disabled="true" style="pointer-events:none;opacity:.4"':''}>Send with university Outlook</a>
+    <a class="btn ghost mail" data-kind="mailto" target="_blank" rel="noopener" href="#" ${blocked?'aria-disabled="true" style="pointer-events:none;opacity:.4"':''}>Other mail app</a>
+    <button class="btn ghost" id="copy" ${blocked?'disabled':''}>Copy text</button>
+  </div>
+  <p class="note">The Outlook button opens your university mailbox with the email ready: check it and press Send. If you change your plan, send a new email; the game master uses the last one.</p>
+  ${ui.copied?`<p class="note" role="status">${esc(ui.copied)}</p>`:''}
+  </section>`;
+}
+function reveal(){
+  const p=plan(), sim=simulate(+p.guess||0), bad=sim.afterTrades<-1;
+  return `<section class="card"><p class="eyebrow">${S.brief.year} · Reveal</p><h2>When the game master reveals the year, enter the code</h2>
+  <p class="note">Your plan above is applied to your account. Make sure it matches the email you sent.</p>
+  <div class="row"><input type="text" id="code" inputmode="numeric" maxlength="6" aria-label="Reveal code" placeholder="····">
+  <button class="btn gold" id="unlock" ${bad?'disabled':''}>Apply ${S.brief.year}</button></div>
+  ${ui.codeMsg?`<p class="${ui.codeMsg.startsWith('That')?'bad':'note'}" role="status" style="margin:0">${esc(ui.codeMsg)}</p>`:''}
+  </section>`;
+}
+// ---------- market tracker (hand-drawn SVG, one axis each, numbered hint markers with arrows)
+function markerDefs(id){ return `<defs><marker id="ar-${id}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrowhead"/></marker></defs>`; }
+function badge(id,num,bx,by,targets){
+  // arrows from the badge edge to each target dot, stopping just short of it
+  const arrows=targets.map(([tx,ty])=>{ const dx=tx-bx, dy=ty-by, d=Math.hypot(dx,dy)||1;
+    const sx=bx+dx/d*12, sy=by+dy/d*12, ex=tx-dx/d*7, ey=ty-dy/d*7;
+    return `<line x1="${sx}" y1="${sy}" x2="${ex}" y2="${ey}" class="arrow" marker-end="url(#ar-${id})"/>`; }).join('');
+  return arrows+`<circle cx="${bx}" cy="${by}" r="11" class="bdg"/><text x="${bx}" y="${by+4.5}" class="bdgt" text-anchor="middle">${num}</text>`;
+}
+const BAND={start:'#8a94a6',2027:'#1f9aa8',2028:'#7b61d1',2029:'#d0559a',2030:'#b08d2a'};
+const bandCol=k=>BAND[k]||'#8a94a6';
+function lineChart(o){
+  const W=440,H=240,L=50,Rr=o.rr||80,T=22,B=34, iw=W-L-Rr, ih=H-T-B;
+  const all=o.series.flatMap(s=>s.values).filter(v=>v!=null);
+  let lo=o.min!==undefined?o.min:Math.min(...all), hi=Math.max(...all);
+  const span=hi-lo||hi||1, step=Math.pow(10,Math.floor(Math.log10(span/4))), st=[1,2,2.5,5,10].map(m=>m*step).find(s=>span/s<=5)||step*10;
+  lo=Math.floor(lo/st)*st; hi=Math.ceil(hi/st)*st; if(hi===lo) hi=lo+st;
+  const n=o.labels.length, x=i=>L+(n===1?iw/2:i*iw/(n-1)), y=v=>T+ih-(v-lo)/(hi-lo)*ih;
+  const ticks=[]; for(let v=lo; v<=hi+1e-9; v+=st) ticks.push(v);
+  const grid=ticks.map(v=>`<line x1="${L}" x2="${L+iw}" y1="${y(v)}" y2="${y(v)}" class="cg"/><text x="${L-8}" y="${y(v)+4}" class="ct" text-anchor="end">${o.fmt(v)}</text>`).join('');
+  const xl=o.labels.map((l,i)=>`<text x="${x(i)}" y="${H-10}" class="ct" text-anchor="middle">${esc(l)}</text>`).join('');
+  const lastIdx=s=>{ for(let i=s.values.length-1;i>=0;i--) if(s.values[i]!=null) return i; return -1; };
+  const ends=o.series.map(s=>{const i=lastIdx(s); return {s,i,yy:y(s.values[i])};}).filter(e=>e.i>=0).sort((a,b)=>a.yy-b.yy);
+  for(let k=1;k<ends.length;k++) if(ends[k].yy-ends[k-1].yy<16) ends[k].yy=ends[k-1].yy+16;
+  const lines=o.series.map(s=>`<polyline points="${s.values.map((v,i)=>v==null?null:x(i)+','+y(v)).filter(Boolean).join(' ')}" class="cl ${s.cls}${s.dash?' dash':''}"/>`+
+      s.values.map((v,i)=>v==null?'':`<circle cx="${x(i)}" cy="${y(v)}" r="${s.dash?4:4.5}" class="cd ${s.cls}${s.dash?' hollow':''}"/>`).join('')).join('');
+  const lab=o.noEnd?'':ends.map(e=>`<text x="${x(e.i)+9}" y="${e.yy+4}" class="cv">${esc(e.s.name)} ${o.fmt(e.s.values[e.i])}</text>`).join('');
+  const stepw=n===1?iw:iw/(n-1);
+  const bands=(o.notes||[]).map(nt=>{ const x0=Math.max(x(nt.i)-stepw/2,L-14), x1=Math.min(x(nt.i)+stepw/2,L+iw+14);
+    return `<rect x="${x0}" y="${T-8}" width="${x1-x0}" height="${ih+8}" rx="6" fill="${bandCol(nt.key)}" class="yband"/>`; }).join('');
+  return `<div class="chartwrap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.aria)}" id="${o.id}">${bands}${grid}${xl}${lines}${lab}</svg></div>`;
+}
+function barChart(o){
+  const W=440,H=240,L=40,Rr=10,T=28,B=34, iw=W-L-Rr, ih=H-T-B;
+  const all=o.series.flatMap(s=>s.values).filter(v=>v!=null), hi=Math.max(1,Math.ceil(Math.max(...all)));
+  const y=v=>T+ih-v/hi*ih, n=o.labels.length, gw=iw/n, bw=Math.min(34,(gw-16)/o.series.length);
+  const ticks=[]; for(let v=0; v<=hi; v+=1) ticks.push(v);
+  const grid=ticks.map(v=>`<line x1="${L}" x2="${L+iw}" y1="${y(v)}" y2="${y(v)}" class="cg"/><text x="${L-6}" y="${y(v)+4}" class="ct" text-anchor="end">${v}%</text>`).join('');
+  let bars='', tops=[];
+  o.labels.forEach((l,i)=>{
+    const gx=L+i*gw+(gw-bw*o.series.length-2*(o.series.length-1))/2; tops[i]=[];
+    o.series.forEach((s,k)=>{ const v=s.values[i], bx=gx+k*(bw+2);
+      if(v==null){ bars+=`<text x="${bx+bw/2}" y="${y(0)-6}" class="ct" text-anchor="middle">?</text>`; return; }
+      const top=y(v), h=Math.max(1,y(0)-top), r=Math.min(4,h);
+      bars+=`<path d="M${bx},${y(0)} V${top+r} Q${bx},${top} ${bx+r},${top} H${bx+bw-r} Q${bx+bw},${top} ${bx+bw},${top+r} V${y(0)} Z" class="cb ${s.cls}"/>`+
+            `<text x="${bx+bw/2}" y="${top-5}" class="cv sm" text-anchor="middle">${o.fmt(v)}</text>`;
+      tops[i].push([bx+bw/2, top-18]); });
+  });
+  const xl=o.labels.map((l,i)=>`<text x="${L+i*gw+gw/2}" y="${H-10}" class="ct" text-anchor="middle">${esc(l)}</text>`).join('');
+  const bands=(o.notes||[]).map(nt=>`<rect x="${L+nt.i*gw+3}" y="${T-20}" width="${gw-6}" height="${ih+20}" rx="6" fill="${bandCol(nt.key)}" class="yband"/>`).join('');
+  return `<div class="chartwrap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.aria)}" id="${o.id}">${bands}${grid}${xl}${bars}</svg></div>`;
+}
+function decodeLock(y){ const lk=LOCK[String(y)]; return lk?JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(lk.d),ch=>ch.charCodeAt(0)))):null; }
+function marketData(){
+  const revealed=S.history.map(h=>h.year), Y=[];
+  let brief={...FIRST}, prices={...FIRST.prices};
+  for(let yr=2027; yr<=2029; yr++){
+    const rv=revealed.includes(yr)?decodeLock(yr):null;
+    const isCurrent=!S.done && S.brief.year===yr;
+    if(!rv && !isCurrent) break;
+    Y.push({year:yr, brief:{...brief, prices:{...prices}}, rv, nw:(S.history.find(h=>h.year===yr)||{}).nw});
+    if(!rv) break;
+    prices={old:rv.endOld, eco:rv.endEco};
+    if(rv.next) brief={...rv.next};
+  }
+  return Y;
+}
+function hintList(items){ return `<ul class="hints">${items.map(it=>`<li style="--hc:${bandCol(it.key)}"><b class="hl">${esc(it.label)}</b><span>${it.text}</span></li>`).join('')}</ul>`; }
+function trackerCard(){
+  const D=marketData(); if(!D.length) return '';
+  const pct=v=>parseFloat(String(v).replace('%','').replace('+',''));
+  const done=D.filter(d=>d.rv), cur=D.find(d=>!d.rv), first=D[0].brief, lastY=D[D.length-1].year;
+  const finalRound=cur&&cur.year===2029;
+  const at=(yy,f)=>{ const d=D.find(z=>z.year===yy); return d?f(d):null; };
+  // ----- current-year signals (used by both graphs)
+  const charterHint=b=> b.ffa<b.tc
+      ? (b.ffa<b.prevSpot?'The market expects spot to be even worse than the charter pays.':'The market expects spot to pay less than the charter, so the charter is the safer income.')
+      : 'The market expects spot to pay more than the charter, so spot may be worth the risk.';
+  const nextHint=b=> b.ffaNext<b.ffa
+      ? 'The market expects rates to fall next year, so think about when to sell.'
+      : (b.year>=2029?'The market expects the recovery to continue, which supports ship values at the end of the game.':'The market expects a recovery, so cash now means buying cheap later.');
+  // ----- ship prices graph: one marker per date
+  let pn=0; const pNotes=[], pHints=[];
+  const pLabels=['Jan '+D[0].year,...done.map(d=>'Dec '+d.year)];
+  pNotes.push({i:0,key:'start'}); pHints.push({key:'start',label:'Start of '+D[0].year,text:'Old ships cost half as much as eco, so the same cash buys twice as many. Eco ships earn more per day.'});
+  done.forEach((d,k)=>{ const up=d.rv.endOld>d.brief.prices.old;
+    let t=up?'Prices rose during the year: teams that bought at the start gained value.':'Prices fell during the year: teams that kept their ships lost value.';
+    if(k===done.length-1 && cur){ const b=cur.brief, weak=pct(b.fleet)>pct(b.demand);
+      t+=' This is also today’s price. '+(weak?'Signals point down this year, so think about selling at today’s price.':(finalRound?'Signals point up, so a low price now may be a chance to buy before the game ends.':'Signals point up, so a low price now may be a chance to buy.')); }
+    pNotes.push({i:k+1,key:d.year}); pHints.push({key:d.year,label:'During '+d.year,text:t}); });
+  const priceChart=lineChart({id:'chPrice',aria:'Ship prices over time, old and eco',labels:pLabels,
+    series:[{name:'Eco',cls:'eco',values:[first.prices.eco/M,...done.map(d=>d.rv.endEco/M)]},
+            {name:'Old',cls:'old',values:[first.prices.old/M,...done.map(d=>d.rv.endOld/M)]}],
+    fmt:v=>'$'+(Math.round(v*10)/10)+'m',min:0,notes:pNotes});
+  // ----- supply vs demand graph: one marker per year
+  let sn=0; const sNotes=[], sHints=[];
+  const sdYears=[...D.map(d=>d.year), lastY+1];
+  sdYears.forEach((yy,i)=>{
+    const d=D.find(z=>z.year===yy); let t;
+    if(d&&d.rv){ const f=pct(d.brief.fleet), dm=pct(d.brief.demand), up=d.rv.spot>d.brief.prevSpot;
+      t=(f<dm?'Cargo grew faster than the fleet':'The fleet grew faster than cargo')+(up?', and rates rose.':', and rates fell.'); }
+    else if(d){ const f=pct(d.brief.fleet), dm=pct(d.brief.demand);
+      t=(f<dm?'Cargo grows faster than the fleet this year, so rates tend to rise.':'The fleet grows faster than cargo this year, so rates tend to fall.'); }
+    else { const b=D[D.length-1].brief, many=pct(b.fleetNext)>=3;
+      t=(many?'Many new ships are coming, which usually pushes rates down.':'Few new ships are coming, which usually supports rates.'); }
+    sNotes.push({i,key:yy}); sHints.push({key:yy,label:yy+(cur&&yy===cur.year?' · this year':(yy===lastY+1?' · next year':'')),text:t});
+  });
+  const fleetV=sdYears.map(yy=> yy===lastY+1 ? pct(D[D.length-1].brief.fleetNext) : at(yy,d=>pct(d.brief.fleet)));
+  const demV=sdYears.map(yy=> yy===lastY+1 ? null : at(yy,d=>pct(d.brief.demand)));
+  // ----- FFA forecast vs actual spot (eco): year before the game to next year
+  let fn=0; const fNotes=[], fHints=[];
+  const fYears=[]; for(let yy=D[0].year-1; yy<=lastY+1; yy++) fYears.push(yy);
+  const spotA=fYears.map(yy=> yy===D[0].year-1 ? first.prevSpot : at(yy,d=>d.rv?d.rv.spot:null));
+  const ffaF=fYears.map(yy=> yy===lastY+1 ? D[D.length-1].brief.ffaNext : at(yy,d=>d.brief.ffa));
+  fYears.forEach((yy,i)=>{ const d=D.find(z=>z.year===yy); let t;
+    if(yy===D[0].year-1) t='Last year’s actual spot: the starting point for this game.';
+    else if(d&&d.rv) t=d.rv.spot>d.brief.ffa?'The forecast was too pessimistic: spot came in above it.':'The forecast was too optimistic: spot came in below it.';
+    else if(d) t=(d.brief.ffa<d.brief.prevSpot?'This year’s forecast is below last year’s spot. ':'This year’s forecast is above last year’s spot. ')+charterHint(d.brief)+' The actual rate is revealed at the end of the round.';
+    else t=nextHint(D[D.length-1].brief);
+    const fk2=yy===D[0].year-1?'start':yy; fNotes.push({i,key:fk2}); fHints.push({key:fk2,label:yy+(yy===D[0].year-1?' · before the game':(cur&&yy===cur.year?' · this year':(yy===lastY+1?' · next year':''))),text:t}); });
+  const ffaChart=lineChart({id:'chFFA',aria:'FFA forecast and actual spot rate per year, eco',labels:fYears.map(String),
+    series:[{name:'Eco spot',cls:'eco',values:spotA},{name:'Eco FFA',cls:'eco',dash:true,values:ffaF},
+            {name:'Old spot',cls:'old',values:spotA.map(v=>v==null?null:v-R.ship.old.spotGap)},{name:'Old FFA',cls:'old',dash:true,values:ffaF.map(v=>v==null?null:v-R.ship.old.spotGap)}],
+    fmt:v=>'$'+(Math.round(v/100)/10)+'k',min:0,notes:fNotes,rr:24,noEnd:true});
+  const sdChart=barChart({id:'chSD',aria:'Fleet growth and cargo demand growth per year',labels:sdYears.map(String),
+    series:[{name:'Fleet growth',cls:'fleet',values:fleetV},{name:'Cargo demand',cls:'dem',values:demV}],fmt:v=>'+'+v+'%',notes:sNotes});
+  const rows=D.map((d,i)=>{ const r=d.rv, b=d.brief, prevNw=i?D[i-1].nw:R.startCash;
+    const chg=(a,c)=>{ const p=(a/c-1)*100; return `<span class="${p>=0?'good':'bad'}">${p>=0?'▲ +':'▼ '}${p.toFixed(0)}%</span>`; };
+    return `<tr class="${r?'':'curr'}"><td>${d.year}${r?'':' <span class="pill2">now</span>'}</td>
+      <td class="num">${r?fk(r.spot)+' '+chg(r.spot,b.prevSpot):'?'}</td>
+      <td class="num">${fk(b.tc)}</td><td class="num">${fk(b.ffa)}</td>
+      <td class="num">${esc(b.fleet)} / ${esc(b.demand)}</td>
+      <td class="num">${fm(b.prices.old)} → ${r?fm(r.endOld)+' '+chg(r.endOld,b.prices.old):'?'}</td>
+      <td class="num">${fm(b.prices.eco)} → ${r?fm(r.endEco)+' '+chg(r.endEco,b.prices.eco):'?'}</td>
+      <td class="num">${d.nw!=null?fm(d.nw)+' '+chg(d.nw,prevNw):'?'}</td></tr>`; }).join('');
+  const open=ui.resultsOpen===true;
+  const lg=a=>`<div class="clegend">${a.map(([c,t])=>`<span><i class="sw ${c}"></i>${t}</span>`).join('')}</div>`;
+  const yearTitle=D[0].year===lastY?String(lastY):D[0].year+'–'+lastY;
+  return `<details class="card results" ${open?'open':''}>
+  <summary><h2>Market history in charts · ${yearTitle}</h2></summary>
+  <div class="annot"><div><h3 class="ch3">Ship prices</h3>${lg([['eco','Eco'],['old','Old']])}${priceChart}</div>${hintList(pHints)}</div>
+  <div class="annot"><div><h3 class="ch3">FFA forecast vs actual spot (per day)</h3><div class="clegend"><span><i class="sw eco"></i>Eco actual</span><span><i class="sw ecod"></i>Eco FFA</span><span><i class="sw old"></i>Old actual</span><span><i class="sw oldd"></i>Old FFA</span></div>${ffaChart}<p class="note">Solid lines are what happened, dashed lines are the forecast. Old ships always earn $4,000 a day less than eco on spot: a fixed simplifying assumption, so the orange lines run parallel to the blue ones.</p></div>${hintList(fHints)}</div>
+  <div class="annot"><div><h3 class="ch3">Supply vs demand (growth per year)</h3>${lg([['fleet','Fleet growth (supply)'],['dem','Cargo demand']])}${sdChart}</div>${hintList(sHints)}</div>
+  </details>`;
+}
+function hintBox(){
+  const b=S.brief, y=b.year, last=y>=2029, tg=R.ship.old.tcGap, gap=R.ship.old.spotGap;
+  const pct=v=>parseFloat(String(v).replace('%','').replace('+',''));
+  const f=pct(b.fleet), d=pct(b.demand);
+  const items=[];
+  items.push(`<b>FFA ${fk(b.ffa)} for ${y}</b> (old ship ${fk(b.ffa-gap)}) is ${b.ffa<b.tc?'below':'above'} the charter offer of ${fk(b.tc)}: `+
+    (b.ffa<b.tc?(b.ffa<b.prevSpot?'the market expects spot to be even worse than the charter pays.':'the market expects spot to pay less than the charter, so the charter is the safer income.'):'the market expects spot to pay more than the charter.'));
+  items.push(`<b>FFA ${fk(b.ffaNext)} for ${y+1}</b> (old ship ${fk(b.ffaNext-gap)}): `+
+    (b.ffaNext>b.ffa
+      ? (last?'the market expects the recovery to continue, which supports ship values at the end of the game.':'the market expects a recovery, so cash now means buying cheap later.')
+      : 'the market expects rates to fall next year, so think about when to sell.'));
+  items.push(`<b>Fleet ${esc(b.fleet)} vs cargo demand ${esc(b.demand)} in ${y}</b>: `+
+    (f>d?'more new ships than new cargo, so rates tend to fall.':'cargo grows faster than the fleet, so rates tend to rise.'));
+  items.push(`<b>Fleet ${esc(b.fleetNext)} in ${y+1}</b> (order book): `+
+    (pct(b.fleetNext)>=4?'a lot of new ships are coming, which usually pushes rates down.':'few new ships are coming, which usually supports rates.'));
+  return `<div class="hintbox" role="note"><p class="eyebrow" style="margin-bottom:6px">Hint · reading the ${y} forecasts</p><ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul><p class="note" style="margin:8px 0 0">Forecasts are often wrong. Use them to size your bet, not to bet everything.</p></div>`;
+}
+
+function lastResult(){
+  if(!S.history.length) return '';
+  const h=S.history[S.history.length-1], prevNw=S.history.length>1?S.history[S.history.length-2].nw:R.startCash;
+  return `<section class="card" style="border-color:var(--gold)"><p class="eyebrow">${h.year} · Your result</p>
+  <h2>Average spot was ${fk(h.spot)} a day. Net worth ${fm(h.nw)} <span class="${h.nw>=prevNw?'good':'bad'}">(${h.nw>=prevNw?'+':''}${fm(h.nw-prevNw)})</span></h2>
+  ${h.forced.length?`<p class="warn">You ran out of cash. The bank sold: ${h.forced.join(', ')} ship${h.forced.length>1?'s':''}.</p>`:''}
+  ${S.done?`<p style="margin:0">Game over. Tell the game master your net worth: <b class="num">${fm(h.nw)}</b>, a return of <b class="num">${((h.nw/R.startCash-1)*100).toFixed(0)}%</b> on ${fm(R.startCash)}.</p>`:''}
+  </section>`;
+}
+function statement(){
+  let bal=0, cur=null; const rows=[];
+  S.ledger.forEach(e=>{ bal+=e.amt; if(e.year!==cur){ cur=e.year; rows.push(`<tr class="yr"><td colspan="3">${esc(String(e.year))}</td></tr>`);}
+    rows.push(`<tr><td>${esc(e.text)}</td><td class="num ${e.amt<0?'bad':''}">${e.amt>=0?'+':''}${fm(e.amt)}</td><td class="num">${fm(bal)}</td></tr>`); });
+  return `<section class="card"><p class="eyebrow">Bank statement</p><h2>Every dollar in and out</h2>
+  <div class="tbl"><table><tr><th>Transaction</th><th>Amount</th><th>Balance</th></tr>${rows.join('')}</table></div>
+  <p class="note">Loans outstanding: ${fm(loanBal())}. ${S.ships.map(s=>`${s.type} ship loan ${fm(s.loan?s.loan.bal:0)}`).join(' · ')}</p></section>`;
+}
+function footer(){
+  return `<section class="row" style="justify-content:space-between">
+   ${S.prev?`<button class="btn ghost" id="undo">Undo the last year</button>`:'<span></span>'}
+   ${ui.confirm==='reset'?`<span class="row"><span class="bad">Erase this team’s account?</span><button class="btn danger" id="resetYes">Erase</button><button class="btn ghost" id="resetNo">Keep</button></span>`
+     :`<button class="btn ghost" id="reset">New game</button>`}</section>
+   <p class="note">Your account is saved in this browser. Keep this page open during the game.</p>`;
+}
+const INTRO={2027:'intro-2027-r7k2.html',2028:'intro-2028-m4q9.html',2029:'intro-2029-x8d3.html'};
+let introShaken=null;
+function introButton(){
+  const a=document.getElementById('introBtn'); if(!a) return;
+  const y=S.done?null:S.brief.year;
+  if(!y||!INTRO[y]){ a.parentElement.style.display='none'; return; }
+  a.parentElement.style.display=''; a.href=INTRO[y];
+  a.textContent='ROUND '+(y-2026)+' · '+y+' — INTRODUCTION OF THE ROUND – READ BEFORE YOU START';
+  if(introShaken!==y){ a.classList.remove('shake'); void a.offsetWidth; a.classList.add('shake'); introShaken=y; }
+}
+function render(){
+  tiles(); introButton();
+  document.getElementById('app').innerHTML = lastResult() + (S.done? trackerCard() : news()+marketBrief()+trackerCard()+planner()+submit()+reveal()) + statement() + footer();
+}
+
+// ---------- events
+const app=document.getElementById('app');
+app.addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b||b.disabled) return;
+  if(b.dataset.buy){ const [k,d]=b.dataset.buy.split('.'); const p=plan(); p[k]=Math.max(0,Math.min(5,p[k]+ +d)); save(); render(); return; }
+  switch(b.id){
+    case 'unlock': {
+      const code=(document.getElementById('code').value||'').trim(), y=String(S.brief.year), lk=LOCK[y];
+      let ok=false; try{ ok=btoa(code)===lk.c; }catch(err){}
+      if(!ok){ ui.codeMsg='That code doesn’t match. Check the number on the screen.'; render(); return; }
+      const rv=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(lk.d),ch=>ch.charCodeAt(0)))); ui.codeMsg=''; ui.copied=''; applyYear(rv); render(); window.scrollTo(0,0); break; }
+    case 'hintBtn': ui.hint=!ui.hint; render(); break;
+    case 'undo': { const p=JSON.parse(S.prev); S=p; save(); render(); break; }
+    case 'reset': ui.confirm='reset'; render(); break;
+    case 'resetNo': ui.confirm=null; render(); break;
+    case 'resetYes': { const n=S.name; S=fresh(); S.name=n; ui.confirm=null; save(); render(); break; }
+    case 'copy': {
+      const txt='To: '+GM_EMAIL+'\nSubject: '+S.name+' – '+S.brief.year+'\n\n'+decisionText();
+      const done=m=>{ui.copied=m;render();};
+      try{ navigator.clipboard.writeText(txt).then(()=>done('Copied. Paste it into a new email to '+GM_EMAIL+'.'),()=>done('Copy did not work here. Write the email by hand from the box above.')); }catch(err){ done('Copy did not work here. Write the email by hand from the box above.'); }
+      break; }
+  }
+});
+// build the email link at the moment of the click, so it always carries the latest name and plan
+app.addEventListener('click',e=>{
+  const a=e.target.closest('a.mail'); if(!a) return;
+  const tn=document.getElementById('teamName'); const v=(tn.value||'').trim();
+  if(v && v!==S.name){ S.name=v; save(); }
+  if(!S.name||S.name===DEFAULT_NAME){ e.preventDefault(); render(); return; }
+  a.href=mailLinks()[a.dataset.kind];
+},true);
+app.addEventListener('toggle',e=>{ if(e.target.classList&&e.target.classList.contains('guide')){ if(!ui.guideOpen) ui.guideOpen={}; ui.guideOpen[e.target.dataset.year]=e.target.open; } },true);
+
+// chart hover / tap: crosshair + tooltip
+function chartHover(e){
+  const r=e.target.closest&&e.target.closest('rect.ch'); const wrap=e.target.closest&&e.target.closest('.chartwrap');
+  document.querySelectorAll('.chartwrap').forEach(w=>{ if(w!==wrap){ const t=w.querySelector('.ctip'); if(t) t.style.opacity=0; const c=w.querySelector('.cx'); if(c) c.style.display='none'; }});
+  if(!r||!wrap) return;
+  const svg=wrap.querySelector('svg'), tip=wrap.querySelector('.ctip'), cx=svg.querySelector('.cx');
+  const xs=+r.dataset.x; cx.setAttribute('x1',xs); cx.setAttribute('x2',xs); cx.style.display='';
+  const scale=svg.getBoundingClientRect().width/440;
+  tip.textContent=r.dataset.tip; tip.style.left=Math.min(Math.max(xs*scale,90),svg.getBoundingClientRect().width-90)+'px'; tip.style.top='-8px'; tip.style.opacity=1;
+}
+app.addEventListener('pointermove',chartHover); app.addEventListener('pointerdown',chartHover);
+app.addEventListener('toggle',e=>{ if(e.target.classList&&e.target.classList.contains('results')) ui.resultsOpen=e.target.open; },true);
+function refreshPreview(){
+  const pv=document.getElementById('mailPreview'), sj=document.getElementById('mailSubject');
+  if(pv) pv.textContent=decisionText();
+  if(sj) sj.textContent=S.name+' – '+S.brief.year;
+}
+app.addEventListener('input',e=>{
+  if(e.target.id==='why'){ plan().why=e.target.value; save(); refreshPreview(); }
+});
+app.addEventListener('change',e=>{
+  const el=e.target, p=S.done?null:plan();
+  if(el.dataset.ship){ p.ships[el.dataset.ship]=el.value; }
+  else if(el.id==='loan'){ p.loan=el.checked; }
+  else if(el.id==='newEmp'){ p.newEmp=el.value; }
+  else if(el.id==='guess'){ const v=parseFloat(el.value); p.guess=isNaN(v)?S.brief.ffa:Math.max(0,v+(el.dataset.type==='old'?R.ship.old.spotGap:0)); }
+  else if(el.id==='why'){ p.why=el.value; save(); return; }
+  else return;
+  save(); render();
+});
+app.addEventListener('keydown',e=>{ if(e.target.id==='code'&&e.key==='Enter'){ document.getElementById('unlock')?.click(); } });
+document.getElementById('teamName').addEventListener('change',e=>{
+  const wasDefault=!S.name||S.name===DEFAULT_NAME;
+  S.name=e.target.value.trim()||DEFAULT_NAME; save();
+  const isDefault=S.name===DEFAULT_NAME;
+  if(wasDefault!==isDefault) setTimeout(render,0); else refreshPreview();
+});
+
+function start(data){ S=(data&&data.S)||load()||fresh(); render(); }
+window.claude?.hot?.snapshot?.(()=>({S}));
+window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+})();
+</script>
+
+</body></html>

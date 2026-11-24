@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Round 2 introduction</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#EEF1F5;--surface:#FFFFFF;--ink:#0B1A33;--muted:#566884;--line:#D3DBE6;--gold:#9C7426;--gold-soft:#F3EAD6;--hero:#0B1A33;--hero-ink:#F4F1EA;--hero-gold:#D4AF6A;--good:#1D7A4C;--bad:#B23636;
+--f-body:'DM Sans',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;--f-num:'DM Mono',ui-monospace,Menlo,monospace;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#081428;--surface:#11243F;--ink:#EEF1F5;--muted:#9FB0C8;--line:#25416A;--gold:#D4AF6A;--gold-soft:#2B3550;--hero:#0F2546;--good:#62C28E;--bad:#EA8080;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#081428;--surface:#11243F;--ink:#EEF1F5;--muted:#9FB0C8;--line:#25416A;--gold:#D4AF6A;--gold-soft:#2B3550;--hero:#0F2546;--good:#62C28E;--bad:#EA8080;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body)}
+.top{background:var(--hero);color:var(--hero-ink)}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top .wrap{padding-block:28px 30px;display:flex;flex-direction:column;gap:8px}
+.eyebrow{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--hero-gold);font-weight:700;margin:0}
+h1{font-size:clamp(26px,5vw,36px);line-height:1.15;margin:0;text-wrap:balance}
+.lead{margin:0;color:#D9E0EA;font-size:17px}
+main .wrap{padding-block:22px 56px;display:flex;flex-direction:column;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.card h2{font-size:19px;margin:0 0 10px;text-wrap:balance}
+.card p{margin:0 0 8px} .card p:last-child{margin-bottom:0}
+ul,ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.callout{background:var(--gold-soft);border-left:5px solid var(--gold);border-radius:0 10px 10px 0;padding:14px 16px;font-weight:700}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:500}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.kv div{background:var(--bg);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.kv span{font-size:12px;color:var(--muted)} .kv b{font:500 18px var(--f-num)}
+.quote{margin:0;border-left:4px solid var(--gold);background:var(--gold-soft);border-radius:0 8px 8px 0;padding:12px 14px;font-weight:700}
+.quote+.quote{margin-top:10px}
+.note{font-size:13px;color:var(--muted)}
+.back{display:inline-block;background:var(--gold);color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:8px;align-self:flex-start}
+:root[data-theme="dark"] .back{color:#0B1A33}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .back{color:#0B1A33}}
+
+.kv div span:last-child:not(:first-child){font-size:12px}
+.sub{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:16px 0 8px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:12px 0 8px}
+.opinion{margin:0;background:var(--bg);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.opinion b{color:var(--gold)}
+.gloss{margin:0;display:grid;grid-template-columns:minmax(120px,max-content) 1fr;gap:8px 16px}
+.gloss dt{font-weight:700} .gloss dd{margin:0}
+@media (max-width:520px){.gloss{grid-template-columns:1fr;gap:2px}.gloss dd{margin-bottom:8px}}
+</style></head><body>
+<header class="top"><div class="wrap"><p class="eyebrow">Round 2 · 2028 · Read before you start</p><h1>Check your exit rule</h1></div></header>
+<main><div class="wrap">
+<section class="card"><p>2027 is over. You are still the management team of your shipping company, and this is round 2 of 3. You need to decide which ships to keep, sell or buy, how to pay for any new ones, and whether each ship works on spot or on charter.</p></section><section class="card"><h2>Everything you need is in the app</h2>
+<p>There you have today’s news (Tuesday 4 January), today’s market data, market expectations, your result from last year, charts to help you visualise the numbers, and a calculator (“What if…?”) where you can test all your options.</p>
+<p>Using this data, you need to make the decisions below:</p><ul><li><b>For each ship you own:</b> spot (the market rate, revealed at the end), a 1-year charter (the rate on screen, fixed), lay-up, sell at today’s price, or scrap (old ships only).</li><li><b>Buy more ships:</b> old, eco, or none.</li><li><b>How to pay for new ships:</b> cash, or the 50% bank loan.</li></ul></section><section class="card"><h2>This round in one minute</h2><p>2027 was a boom: spot paid more than the charter and more than the forecast, and ship prices rose. Your result is at the top of your team app. You have <b>5 minutes</b> this round.</p><div class="kv"><div><span>Eco spot 2027</span><b>$21,000/day</b></div><div><span>Old spot 2027</span><b>$17,000/day</b></div><div><span>Old ship now</span><b>$21m</b></div><div><span>Eco ship now</span><b>$40m</b></div></div></section><section class="card"><h2>What to look at before you decide</h2><ol><li><b>Your own rule:</b> read the “Why” you wrote last year. Does this year’s brief trigger it?</li><li><b>Supply vs demand this year:</b> which grows faster now, the fleet or the cargo? Compare with last year.</li><li><b>The charter offer:</b> compare it with last year’s spot. What are charterers telling you?</li><li><b>The FFA:</b> what does the market expect for this year, and for next year?</li><li><b>Sell or keep:</b> if you keep a ship, can you pay its running costs and loan this year? If cash goes below zero, the bank sells at the <i>year-end</i> price, not today’s.</li><li><b>Cash is also a choice:</b> who will be able to buy cheap next year?</li><li><b>Watch out:</b> “it went up, so keep it” is not a reason. Decide from this year’s numbers.</li></ol><p class="note" style="margin-top:10px">The optimist and the pessimist in the news may each be right about a different year. Check their claims against the numbers.</p></section><div class="callout">No need to calculate anything: your team app does all the maths. Try your options there, then send your decision from the app.</div><section class="card"><h2>Rules to keep in mind</h2><ul>
+<li><b>Loan:</b> 50% of the price. Each year you repay 10% of the original loan plus 7% interest.</li>
+<li><b>Cash below zero at year end:</b> the bank sells your ships at the year-end price.</li>
+<li><b>Old ships</b> earn $4,000 a day less than eco on spot and $3,000 less on charter (fixed simplifying assumptions).</li>
+<li><b>Lay-up:</b> no income, 30% of the running costs.</li></ul></section><section class="card"><h2>Key numbers for the two ships</h2><div class="tbl"><table>
+<tr><th></th><th>Old Kamsarmax (2011)</th><th>Eco Kamsarmax (2021)</th></tr>
+<tr><td>Earning days a year</td><td class="num">335</td><td class="num">355</td></tr>
+<tr><td>Running costs</td><td class="num">$7,800/day = $2.85m/yr</td><td class="num">$6,800/day = $2.48m/yr</td></tr>
+<tr><td>Spot rate</td><td>Eco spot − $4,000/day (fixed assumption)</td><td>Year average, revealed at the end</td></tr>
+<tr><td>1-year charter</td><td>Eco offer − $3,000/day</td><td>The offer on screen</td></tr>
+<tr><td>Lay-up (no income)</td><td class="num">$0.85m a year</td><td class="num">$0.74m a year</td></tr>
+<tr><td>Scrap value</td><td class="num">$6m</td><td>Not allowed</td></tr></table></div></section><section class="card"><h2>Glossary</h2><dl class="gloss">
+<dt>Kamsarmax</dt><dd>A dry bulk ship of about 82,000 tonnes deadweight that carries grain, coal and bauxite. It is the largest size that can load at Port Kamsar in Guinea and still pass through the Panama Canal.</dd>
+<dt>Eco ship</dt><dd>A modern design that burns less fuel. In the game: built 2021, costs more, earns more per day.</dd>
+<dt>Spot rate</dt><dd>What a ship earns per day on the open market. It changes every day; the game uses the yearly average.</dd>
+<dt>1-year charter</dt><dd>A contract that hires out your ship for one year at a fixed daily rate, agreed before the year starts.</dd>
+<dt>FFA (forward freight agreement)</dt><dd>A contract traded today on a future freight rate: the market’s forecast of spot. It can be wrong.</dd>
+<dt>Fleet growth</dt><dd>How much the number of ships grows in a year, after old ships are scrapped.</dd>
+<dt>Order book</dt><dd>Ships already ordered from shipyards and not yet delivered. It tells you next year’s fleet growth.</dd>
+<dt>Cargo demand (tonne-miles)</dt><dd>How much cargo is carried, multiplied by how far it travels. Longer routes need more ships.</dd>
+<dt>Lay-up</dt><dd>Parking a ship with no work: no income, lower running costs.</dd>
+<dt>Scrap</dt><dd>Selling a ship for its steel. In the game: $6m, old ships only.</dd>
+<dt>Running costs</dt><dd>Crew, insurance, repairs and supplies to keep a ship working, paid every day of the year.</dd>
+<dt>Net worth</dt><dd>Cash + ship values − loans. Your score.</dd></dl></section><section class="card"><h2>Three rules for good decisions</h2><p class="quote">Decide your exit before you enter.</p><p class="quote">Good managers don’t need to guess right. They need to survive being wrong.</p><p class="quote">Don’t pick a forecaster. Check their claims against supply, demand and the FFA, size your bet so you survive if you’re wrong, and decide your exit in advance.</p></section>
+<p class="note">Close this tab to go back to your team app.</p>
+</div></main></body></html>
